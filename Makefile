@@ -90,26 +90,27 @@ $(GENERATED)/.submodules:
 	mkdir "$(GENERATED)"
 	touch "$(GENERATED)/.submodules"
 
-$(GENERATED)/.prepare: $(GENERATED)/.submodules
-	rm -rf $(foreach i,xfwm4 metacity-1 openbox-3 xfce-notify-4.0 index.theme,$(BASE)/$(i))
-	$(MAKE) -C "$(BASE)" install DESTDIR="$(GENERATED)"
-	mv "$(GENERATED)/usr/share/themes/Numix" "$(GENERATED)/Numix"
-	rm -rf "$(GENERATED)/usr"
-	for f in $$(find $(GENERATED)/Numix -maxdepth 1 -type d);do \
-	    cd "$$f";   \
-	    [ -d "$$f/dist" ] && mv -f "$$f"/dist/* "$$f"/ || true;  \
-	done
-	find $(GENERATED)/Numix -empty -delete
-	touch "$(GENERATED)/.prepare"
-
-$(GENERATED)/.success-Shiki-%: $(GENERATED)/.prepare
-	cp -r $(GENERATED)/Numix $(GENERATED)/Shiki-$*
-	find $(GENERATED)/Shiki-$* -type f -print0 | xargs -0 sed -i   \
+$(GENERATED)/.success-Shiki-%: $(GENERATED)/.submodules
+	$(eval TEMP_DIR := $(shell mktemp -d))
+	$(foreach SRC_DIR,src scripts Makefile,cp -r $(BASE)/$(SRC_DIR) $(TEMP_DIR)/$(SRC_DIR);)
+	find "$(TEMP_DIR)/src" -type f -iregex '.*\(\.css\|\.scss\|gtkrc\|\.svg\)$$' -print0 | xargs -0 sed -i \
 		-e 's/#d64937/#$(Shiki-$*_selected)/g'  \
 		-e 's/#f0544c/#$(Shiki-$*_selected)/g'  \
 		-e 's/#444*/#$(Shiki-$*_dark_bg)/g'
-	find $(GENERATED)/Shiki-$* -maxdepth 1 -not -type d -print0 | xargs -0 rm -f
-	rm -rf $(GENERATED)/Shiki-$*/Shiki-$*
+	find "$(TEMP_DIR)/src/assets" -type f -iname "*png" -delete
+	sed -i 's/#f1544d/#$(Shiki-$*_selected)/g' "$(TEMP_DIR)/src/assets/all-assets.svg"
+	pushd "$(TEMP_DIR)/scripts";\
+	./render-assets.sh;\
+	popd
+	mkdir "$(TEMP_DIR)/generated"
+	$(MAKE) -C "$(TEMP_DIR)" install DESTDIR="$(TEMP_DIR)/generated"
+	mv "$(TEMP_DIR)/generated/usr/share/themes/Numix" "$(GENERATED)/Shiki-$*"
+	rm -rf "$(TEMP_DIR)"
+	for f in $$(find $(GENERATED)/Shiki-$* -maxdepth 1 -type d);do \
+	    cd "$$f";   \
+	    [ -d "$$f/dist" ] && mv -f "$$f"/dist/* "$$f"/ || true;  \
+	done
+	find $(GENERATED)/Shiki-$* -empty -delete
 	touch "$(GENERATED)/.success-Shiki-$*"
 
 $(GENERATED)/.success: $(foreach COLOR,$(COLORS),$(GENERATED)/.success-Shiki-$(COLOR))

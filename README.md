@@ -1,6 +1,4 @@
-**This project is now abandoned. When GNOME developers decide to stop breaking
-things every minor release, maybe then it'll be worth maintaining. But I'm
-done with themes, sorry. Anyone is permitted to fork and maintain this.**
+**This is updated and maintained fork of [Somasis's shiki-colors-revival](https://github.com/somasis/shiki-colors-revival).**
 
 # shiki-colors-revival
 This consists mostly of a script that modifies the original Numix theme's
@@ -23,6 +21,7 @@ GPL-3, Xfwm4 and Metacity are GPL-2, Plank themes and build system are ISC)
 - `sed`
 - `git`
 - `make`
+- `scss`, `sassc`
 - `gtk-engine-murrine`, needed for GTK2 themes
 - `xfwm4`, needed for Xfwm4 themes
 - `metacity`, or `marco` (`mutter` might work too) for the Metacity themes
@@ -30,14 +29,14 @@ GPL-3, Xfwm4 and Metacity are GPL-2, Plank themes and build system are ISC)
 ## Downloading
 Either use `git` to clone this repository:
     
-    git clone https://github.com/Somasis/shiki-colors-revival
+    git clone https://github.com/gch1p/shiki-colors-revival
 
 or just [download the latest release](releases).
 
 ## Installing
 1. Open a terminal in this repo's directory.
 2. `make`, or run `make help` to see what else the Makefile can do.
-3. `make install` as root
+3. `make install` as root, or manually copy directories from `generated` to `~/.themes`.
 
 **Exherbo users**:
     There is an exheres in ::somasis; x11-themes/shiki-colors-revival.
@@ -58,12 +57,12 @@ minor version of GTK3, again. We can make upstream do all the work. :)
 
 These are screenshots of the themes running on my Xfce desktop.
 
-![Shiki-Brave](https://raw.githubusercontent.com/Somasis/shiki-colors-revival/master/screenshots/Shiki-Brave-Revival.png)
-![Shiki-Human](https://raw.githubusercontent.com/Somasis/shiki-colors-revival/master/screenshots/Shiki-Human-Revival.png)
-![Shiki-Illustrious](https://raw.githubusercontent.com/Somasis/shiki-colors-revival/master/screenshots/Shiki-Illustrious-Revival.png)
-![Shiki-Noble](https://raw.githubusercontent.com/Somasis/shiki-colors-revival/master/screenshots/Shiki-Noble-Revival.png)
-![Shiki-Wine](https://raw.githubusercontent.com/Somasis/shiki-colors-revival/master/screenshots/Shiki-Wine-Revival.png)
-![Shiki-Wise](https://raw.githubusercontent.com/Somasis/shiki-colors-revival/master/screenshots/Shiki-Wise-Revival.png)
+![Shiki-Brave](https://raw.githubusercontent.com/gch1p/shiki-colors-revival/master/screenshots/Shiki-Brave-Revival.png)
+![Shiki-Human](https://raw.githubusercontent.com/gch1p/shiki-colors-revival/master/screenshots/Shiki-Human-Revival.png)
+![Shiki-Illustrious](https://raw.githubusercontent.com/gch1p/shiki-colors-revival/master/screenshots/Shiki-Illustrious-Revival.png)
+![Shiki-Noble](https://raw.githubusercontent.com/gch1p/shiki-colors-revival/master/screenshots/Shiki-Noble-Revival.png)
+![Shiki-Wine](https://raw.githubusercontent.com/gch1p/shiki-colors-revival/master/screenshots/Shiki-Wine-Revival.png)
+![Shiki-Wise](https://raw.githubusercontent.com/gch1p/shiki-colors-revival/master/screenshots/Shiki-Wise-Revival.png)
 
 ## Related
 
@@ -83,5 +82,5 @@ can be found at [arc-colors-revival].
 [shimmerproject]: http://github.com/shimmerproject
 [fredbird67]: http://xfce-look.org/usermanager/search.php?username=fredbird67
 [GNOME Colors palette]: https://github.com/Somasis/gnome-colors-revival/blob/master/Palette.png
-[releases]: https://github.com/Somasis/shiki-colors-revival/releases
+[releases]: https://github.com/gch1p/shiki-colors-revival/releases
 [GNOME Colors]: https://code.google.com/p/gnome-colors
