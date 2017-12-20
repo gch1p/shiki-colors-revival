@@ -27,11 +27,9 @@ GPL-3, Xfwm4 and Metacity are GPL-2, Plank themes and build system are ISC)
 - `metacity`, or `marco` (`mutter` might work too) for the Metacity themes
 
 ## Downloading
-Either use `git` to clone this repository:
+Clone this repository:
     
     git clone https://github.com/gch1p/shiki-colors-revival
-
-or just [download the latest release](releases).
 
 ## Installing
 1. Open a terminal in this repo's directory.
